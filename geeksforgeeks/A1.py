@@ -4,6 +4,6 @@ for each in range(count):
     inputVal = int(input())
     val = math.log(inputVal)/math.log(2)
     if int(val) - val == 0:
-        print(str(val))
+        print(int(inputVal))
     else:
-        print(math.pow(2, int(val)+1))
+        print(int(math.pow(2, int(val)+1)))
