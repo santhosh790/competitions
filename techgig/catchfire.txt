@@ -1,0 +1,31 @@
+
+A Grass Field is divided into N x M Blocks of size 1. Some of the blocks in the field have caught fire. Now, in each second, the fire is spreading to the adjacent Blocks i.e. if (i , j) Block is on fire at time t, then Blocks (i + 1, j) , (i - 1, j) , (i , j - 1) , (i , j + 1) will be on fire at time t+1.
+
+You will be provided with the current configuration of the field at time t = 0. Your task is to determine the minimum time in which the whole field catches fire.
+M[i][j] = 1 , if the block is on fire.
+M[i][j] = 0 , if the block is not on fire.
+
+
+Input Format
+The First line will contain two Integers N and M denoting dimensions of the field.
+Each of the next N lines will contain M integers.
+
+
+Constraints
+1 <= N,M <= 500
+M[i][j] = {0,1}
+
+
+Output Format
+You have to print the Minimum Time in which the whole field catches fire.
+If the complete field never catches fire, output -1. 
+
+
+Sample TestCase 1
+Input
+3 3
+0 0 0
+0 1 0
+0 0 0
+Output
+2

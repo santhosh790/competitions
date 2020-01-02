@@ -1,0 +1,17 @@
+Daily Coding Problem::
+
+------------ Proble 1 ---------------------
+Given a list of numbers and a number k, return whether any two numbers from the list add up to k.
+
+For example, given [10, 15, 3, 7] and k of 17, return true since 10 + 7 is 17.
+
+Bonus: Can you do this in one pass?
+
+Answers:::
+1. Find all the subsequences of length. While doing so compute the sum and of the two elements and check if it is equal to k. If ye, print Yes, else keep searching. This is a brute Force approach.
+
+2. Sort the array in non-decreasing order. Then start traversing the array from its right end. Say we have the sorted array, {3,5,7,10} and we want the sum to be 17. We will start from element 10, index=3, let's denote the index with 'j'. Then include the current element and compute required_sum= sum - current_element. After that, we can perform a binary or ternary search in array[0- (j-1)] to find if there is an element whose value is equal to the required_sum. If we find such an element, we can break as we have found a subsequence of length 2 whose sum is the given sum. If we don't find any such element, then decrease the index of j and repeat the above-mentioned steps for resulting subarray of length= length-1 i.e. by excluding the element at index 3 in this case. 
+----- 
+3. an O(nlogn) solution - sort + check sum with 2 iterators (beginning and end).
+
+4. an O(n) solution - hashing the array. Then checking if sum-hash[i] exists in the hash table or not.
