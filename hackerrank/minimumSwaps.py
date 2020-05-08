@@ -31,10 +31,15 @@ def minimumSwaps(arr):
     for i in range(len(arr)):
         if (arr[i]) != i+1:
                 l = arr.index(i+1)
+                print(l)
                 arr[i],arr[l] = i+1,arr[i]
                 counter += 1
+        print(arr)
     return counter
 
+print(minimumSwaps([7, 1, 3, 2, 4, 5, 6]))
+
+'''
 if __name__ == '__main__':
     fptr = open(os.environ['OUTPUT_PATH'], 'w')
 
@@ -47,3 +52,4 @@ if __name__ == '__main__':
     fptr.write(str(res) + '\n')
 
     fptr.close()
+'''

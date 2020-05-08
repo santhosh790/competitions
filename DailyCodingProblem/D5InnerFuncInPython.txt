@@ -1,0 +1,123 @@
+This problem was asked by Jane Street.
+
+cons(a, b) constructs a pair, and car(pair) and cdr(pair) returns the first and last element of that pair. For example, car(cons(3, 4)) returns 3, and cdr(cons(3, 4)) returns 4.
+
+Given this implementation of cons:
+
+def cons(a, b):
+    def pair(f):
+        return f(a, b)
+    return pair
+
+Implement car and cdr.
+
+
+---------------------
+
+basically this works based on Closures in Python.
+
+
+Answer for this is clearly explained in https://stackoverflow.com/questions/52481607/dont-understand-the-inner-function-in-python
+First of all: Python function objects are first class objects. A def statement results in a new function object, and you can retrieve that object by using the function name:
+
+>>> def foo():
+...     return 'foo was called'
+...
+>>> foo
+<function foo at 0x11b3d8ae8>
+What this means is that you can assign that object to other names too, and you can pass them as parameters to function calls. You can then later on call the function object by adding (...) to the reference:
+
+>>> bar = foo
+>>> bar()
+'foo was called'
+The function name is assigned to in the current namespace. In a module, that's the globals, but in a function such as cons, the name is added as a local. return pair in the cons function then returns the function object pair to the caller.
+
+And function parameters such as f and a and b are also variables; if you pass in a function object as a parameter, then parameter_name(...) will call paramater_name and pass in any arguments in the ... part. f(a, b) calls f and passes in a and b.
+
+The next item to understand are closures; closures are an extra namespace attached to function objects, for variables from a surrounding scope.
+
+In the following example, spam is a name in the closure of the bar function:
+
+>>> def foo():
+...     spam = 'Vikings'
+...     def bar():
+...         return spam
+...     return bar
+...
+>>> foo()
+<function foo.<locals>.bar at 0x11b44bf28>
+>>> foo()()
+'Vikings'
+Calling foo() returns a new function object; the bar() function inside of foo(). Calling that returned function object produces 'Vikings', the value of the spam variable in the foo function. How did bar() get access to that? Via the closure:
+
+>>> foo().__closure__
+(<cell at 0x11b3c05b8: str object at 0x11b469180>,)
+>>> foo().__closure__[0].cell_contents
+'Vikings'
+So nested functions can have access to names from the surrounding scope via closures. (Side note: it's not the value that's stored in a closure, it's the variable. The variable can change over time, and just like other variables accessing the name later will reflect the new value; if spam was changed later on, calling bar() again would return the new value).
+
+Now to your function: cons() creates an inner function pair(), and pair() has access to the parameters a and b via its closure:
+
+>>> def cons(a, b):
+...     def pair(f):
+...         return f(a, b)
+...     return pair
+...
+>>> cons(42, 81)
+<function cons.<locals>.pair at 0x11b46f048>
+>>> pair_42_81 = cons(42, 81)
+>>> pair_42_81.__closure__
+(<cell at 0x11b3c02b8: int object at 0x10f59a750>, <cell at 0x11b3c05b8: int object at 0x10f59ac30>)
+>>> pair_42_81.__closure__[0].cell_contents
+42
+>>> pair_42_81.__closure__[1].cell_contents
+81
+The pair() function takes a parameter f, and calls that parameter, passing in a and b. Lets see what happens when we pass in print.
+
+print is a function too, it is an object that you can call, and it writes the arguments to the console with spaces in between:
+
+>>> print
+<built-in function print>
+>>> print('arg1', 'arg2')
+arg1 arg2
+If you passed that to the pair() function that cons() returns, you can see what f(a, b) does:
+
+>>> pair_42_81(print)
+42 81
+print, passed to pair(), is assigned to f, and f(a, b) is exactly the same thing as print(a, b).
+
+We can see that print() was called because the values are written out to the console. But you could also create a function that returns a new value. Say you have a function that adds up two numbers, and returns that value:
+
+>>> def add(first, second):
+...     return first + second
+...
+>>> add(42, 81)
+123
+>>> pair_42_81(add)
+123
+We can call the function directly, and 123 is returned, or we can have pair_42_81() do it for us, and the same result is returned to us. Simple!
+
+All this works because functions are objects and can be passed around like other variables, and because pair_42_81 has a = 42 and c = 81 stored in a closure, and will use those to call a given object f with those two arguments.
+
+Next up are cdr() and car(), which will return either the first or last element of a pair. If cons(a, b) produces pair(f) returning f(a, b), then cdr() and car() must each create a function to pass to pair() that'll extract either a or b.
+
+So create a nested function in each, and and have cdr() and car() call pair() with that function. The nested function does the work of picking either a or b, and returns that value. Then return the result of the call to the outside world:
+
+def car(pair):
+    def return_first(a, b):
+        return a
+    return pair(return_first)
+
+def cdr(pair):
+    def return_last(a, b):
+        return b
+    return pair(return_last)
+pair(return_first) calls return_first(a, b), a is returned, and car() can return that to the caller:
+
+>>> car(cons(42, 81))
+42
+and the same applies to pair(return_last), only now b is returned:
+
+>>> cdr(cons(42, 81))
+81
+You may be interested in the background of these operations; car, cdr and cons come from LISP, where cons a b Constructs a cell with two pointers (explaining the name), and car (meaning Contents of the Address part of the Register number in the IBM 704 instruction set LISP was created on) and cdr (meaning Contents of the Decrement part of the Register number in 704 language) take the first and remainder parts of such a cell. See this Wikipedia article on the names.

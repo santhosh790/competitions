@@ -1,0 +1,52 @@
+Question 1)
+
+Given MainStr = "abbbcba" and SubStr = "bbc".
+
+Write a function to find out if SubStr is present in MainStr.
+
+Restrictions
+- Can't use any string manipulation library functions
+- Can't use any regex
+
+Answer)
+
+Char[] mainArray = MainStr.toCharArray();
+Char[] subArray = SubStr.toCharArray();
+
+for(int i=0; i < MainStr.length()-SubStr.length()+1; i++){
+    if(mainArray[i] == subArray[0]){
+        boolean isFound = true;
+        for(int j=0;j<Substr.length();j++){
+            if(mainArray[i+j]!=subArray[j]){
+                isFound = false;
+                break;
+            }
+        }
+        if(isFound){
+            return true;
+        }
+    }
+}
+return false;
+
+
+
+--------------------------------------------------------------
+
+
+Question 2)
+
+Initially an Incrementally sorted array = [3,4,5,6,7,8,9].
+
+Rotated, becomes say n = 1 [9,3,4,5,6,7,8] -> Rotated Sorted Array. With n = 2 [8,9,3,4,5,6,7]. With n = 6 [5,6,7,8,9,3,4].
+
+Find the smallest element. Write an optimized solution.
+
+Answer)
+
+if (mid + 1 < mid) return mid + 1
+if (mid < mid-1) return mid
+
+if (mid < last) traverse left half.
+
+else if (mid > last) traverse right half.

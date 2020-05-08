@@ -1,0 +1,15 @@
+The edit distance between two strings refers to the minimum number of character insertions, deletions, and substitutions required to change one string to the other. For example, the edit distance between “kitten” and “sitting” is three: substitute the “k” for “s”, substitute the “e” for “i”, and append a “g”.
+
+Given two strings, compute the edit distance between them
+
+
+https://web.stanford.edu/class/cs124/lec/med.pdf - A bigger solution to this problems
+
+https://github.com/mission-peace/interview/blob/master/src/com/interview/dynamic/EditDistance.java
+
+https://www.geeksforgeeks.org/edit-distance-dp-using-memoization/
+	https://www.geeksforgeeks.org/edit-distance-dp-5/
+	https://www.geeksforgeeks.org/edit-distance-and-lcs-longest-common-subsequence/
+https://www.techiedelight.com/levenshtein-distance-edit-distance-problem/
+
+
