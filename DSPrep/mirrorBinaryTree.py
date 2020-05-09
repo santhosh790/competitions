@@ -23,7 +23,8 @@ class BinaryTree_Operations:
         if head1 == None or head2 == None:
             return False
 
-        return head1.data == head2.data and self.mirror_tree(head1.left, head2.right)
+        return head1.data == head2.data and self.mirror_tree(head1.left, head2.right) and self.mirror_tree(head1.right,
+                                                                                                           head2.left)
 
 
 
