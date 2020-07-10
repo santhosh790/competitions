@@ -34,7 +34,8 @@ Output
 WIN
 Explanation
 
-For the given test case, If we shuffle the players and villains, we can observe that all the villains can be killed by players.
+For the given test case, If we shuffle the players and villains, we can observe that all the villains can be killed by
+players.
 
 
 Player

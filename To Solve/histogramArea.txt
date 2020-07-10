@@ -1,0 +1,46 @@
+https://tech.pic-collage.com/algorithm-largest-area-in-histogram-84cc70500f0c
+
+https://www.interviewbit.com/problems/largest-rectangle-in-histogram/
+
+https://www.geeksforgeeks.org/maximum-size-rectangle-binary-sub-matrix-1s/
+
+https://www.geeksforgeeks.org/maximum-size-sub-matrix-with-all-1s-in-a-binary-matrix/
+
+
+
+Algorithms in most of the Interviews:
+https://www.youtube.com/watch?v=r1MXwyiGi_U
+https://www.youtube.com/watch?v=zHczhZn-z30
+1. Depth First Search - Stack
+2. Breadth First Search - Queue
+3. Matching Paranthesis - Stack
+4. Hash Tables
+        Matrix
+        Cache values
+        Number series
+    HTs are mostly used for memorization purposes
+5. Variables/Pointer Manipulations
+            Traversing string both ways
+            Traversing linkedlist
+            Palindrome
+6. reverse linked list (duplicates , removing duplicates)
+7. sorting fundamentals (quicksort, mergesort,bubblesort techniques ,
+   runtime of a sort,time space complexity)
+8. Recursion
+        1. What you do in every recursion
+        2. What you do to end the recursion
+9. custom data structures (object oriented programming)
+10.Binary search
+
+In interview::
+https://www.youtube.com/watch?v=LQFsEwcCO1E
+1. Ability to handle ambiquity in questions
+2. Coming up with different solutions based on time complexity and optimization
+3. Not ask for permission instead go about discussing solution
+
+
+
+
+
+Some stack related questions:
+https://leetcode.com/explore/challenge/card/may-leetcoding-challenge/536/week-3-may-15th-may-21st/3334/discuss/168311/C++JavaPython-O(1)
