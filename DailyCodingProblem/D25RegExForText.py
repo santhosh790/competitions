@@ -1,3 +1,4 @@
+'''
 This problem was asked by Facebook.
 
 Implement regular expression matching with the following special characters:
@@ -13,7 +14,8 @@ Given the regular expression ".*at" and the string "chat", your function should 
 
 https://leetcode.com/articles/regular-expression-matching/
 
-Recursion method:: 
+Recursion method::
+'''
 
 def isMatch(text, pattern):
     if not pattern:
@@ -21,7 +23,7 @@ def isMatch(text, pattern):
 
     first_match = bool(text) and pattern[0] in {text[0], '.'}
 
-    if len(pattern) >= 2 and pattern[1] == '*': // if it has *, either ignore the pattern or remove text till pattern has some other string
+    if len(pattern) >= 2 and pattern[1] == '*': # if it has *, either ignore the pattern or remove text till pattern has some other string
         return (isMatch(text, pattern[2:]) or
                 first_match and isMatch(text[1:], pattern))
     else:
